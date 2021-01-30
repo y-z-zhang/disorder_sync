@@ -15,10 +15,15 @@ sfont = {'fontname': 'serif'}
 n = 16
 t = np.linspace(0, 600, num=120001)
 
-current_homo = np.loadtxt('data/oc091319_8.txt')
-current_hetero = np.loadtxt('data/oc091319_24.txt')
-#current_homo = np.loadtxt('data/oc112019_10.txt')
-#current_hetero = np.loadtxt('data/oc112019_12.txt')
+# experimental trajectories presented in the main text
+#current_homo = np.loadtxt('data/oc091319_8.txt')
+#current_hetero = np.loadtxt('data/oc091319_24.txt')
+
+# experimental trajectories presented in the SI
+#current_homo = np.loadtxt('data/oc012521_13.txt')
+#current_hetero = np.loadtxt('data/oc012521_18.txt')
+current_homo = np.loadtxt('data/oc012221_5.txt')
+current_hetero = np.loadtxt('data/oc012221_8.txt')
 
 # In[]
 fig = plt.figure(1)

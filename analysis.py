@@ -1,6 +1,4 @@
 # In[]
-import os
-import seaborn as sns
 from scipy.signal import hilbert, find_peaks
 import matplotlib.pyplot as plt
 import numpy as np
@@ -8,9 +6,6 @@ import matplotlib
 from matplotlib import rc
 #matplotlib.use('PDF')
 rc('text', usetex=True)
-
-#os.chdir('/home/yuanzhao/random_hetero/Istvan')
-#print(os.getcwd())
 
 # In[]
 # These are the "Tableau 20" colors as RGB.

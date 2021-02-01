@@ -2,7 +2,6 @@
 # This script analyzes how the level of synchrony changes with oscillator heterogeneity in our electrochemical experiments.
 
 # In[]
-from scipy.signal import hilbert, find_peaks
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib

@@ -1,16 +1,15 @@
+# <md>
+# This script compares homogeneous and heterogeneous oscillators in terms of the measured oscillator heterogeneity (when uncoupled) and the time-averaged synchronization error (when coupled).
+# Five independent sets of electrochemical experiments are performed, which demonstrate that more heterogeneous oscillators can synchrnize better.
+
 # In[]
-import os
-import seaborn as sns
 from scipy.signal import hilbert, find_peaks
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib
 from matplotlib import rc
-matplotlib.use('PDF')
-rc('text', usetex=False)
-
-#os.chdir('/home/yuanzhao/random_hetero/Istvan')
-#print(os.getcwd())
+#matplotlib.use('PDF')
+rc('text', usetex=True)
 
 # In[]
 # These are the "Tableau 20" colors as RGB.
@@ -25,56 +24,61 @@ for i in range(len(tableau20)):
     r, g, b = tableau20[i]
     tableau20[i] = (r / 255., g / 255., b / 255.)
 
+# <md>
+# Import time series for coupled oscillators measured from the electrochemical experiments.
+
 # In[]
-#t = np.linspace(0, 100, num=20001)
 n = 16  # number of oscillators
 m = 12  # number of experiments
 
-# experimental data for coupled oscillators
+# experimental time series for coupled oscillators (600 seconds of data for each time series)
 data = np.zeros((m, 120480, n))
-# homogeneous
-data[0, :, :] = np.loadtxt('data/oc092019_6.txt')   # trial 1
-data[1, :, :] = np.loadtxt('data/oc092019_15.txt')  # trial 2
-data[2, :, :] = np.loadtxt('data/oc111919_22.txt')  # trial 6
-data[3, :, :] = np.loadtxt('data/oc112519_16.txt')  # trial 11
-data[4, :, :] = np.loadtxt('data/oc112519_39.txt')  # trial 14
-data[5, :, :] = np.loadtxt('data/oc092019_21.txt')  # trial 4
-# heterogeneous
-data[6, :, :] = np.loadtxt('data/oc092019_8.txt')   # trial 1
-data[7, :, :] = np.loadtxt('data/oc092019_10.txt')  # trial 2
-data[8, :, :] = np.loadtxt('data/oc111919_24.txt')  # trial 6
-data[9, :, :] = np.loadtxt('data/oc112519_19.txt')  # trial 11
-data[10, :, :] = np.loadtxt('data/oc112519_42.txt')  # trial 14
-data[11, :, :] = np.loadtxt('data/oc092019_19.txt')  # trial 4
+# homogeneous oscillators
+data[0, :, :] = np.loadtxt('data/oc092019_6.txt')
+data[1, :, :] = np.loadtxt('data/oc092019_15.txt')
+data[2, :, :] = np.loadtxt('data/oc111919_22.txt')
+data[3, :, :] = np.loadtxt('data/oc112519_16.txt')
+data[4, :, :] = np.loadtxt('data/oc112519_39.txt')
+data[5, :, :] = np.loadtxt('data/oc092019_21.txt')
+# heterogeneous oscillators
+data[6, :, :] = np.loadtxt('data/oc092019_8.txt')
+data[7, :, :] = np.loadtxt('data/oc092019_10.txt')
+data[8, :, :] = np.loadtxt('data/oc111919_24.txt')
+data[9, :, :] = np.loadtxt('data/oc112519_19.txt')
+data[10, :, :] = np.loadtxt('data/oc112519_42.txt')
+data[11, :, :] = np.loadtxt('data/oc092019_19.txt')
 
-# experimental data for uncoupled oscillators
+# experimental time series for uncoupled oscillators (200 seconds of data for each time series)
 Data = np.zeros((m, 20400, n))
-# homogeneous
-Data[0, :, :] = np.loadtxt('data/oc092019_3.txt')   # trial 1
-Data[1, :, :] = np.loadtxt('data/oc092019_11.txt')  # trial 2
-Data[2, :, :] = np.loadtxt('data/oc111919_19.txt')  # trial 6
-Data[3, :, :] = np.loadtxt('data/oc112519_17.txt')  # trial 11
-Data[4, :, :] = np.loadtxt('data/oc112519_40.txt')  # trial 14
-Data[5, :, :] = np.loadtxt('data/oc092019_20.txt')  # trial 4
-# heterogeneous
-Data[6, :, :] = np.loadtxt('data/oc092019_7.txt')   # trial 1
-Data[7, :, :] = np.loadtxt('data/oc092019_9.txt')   # trial 2
-Data[8, :, :] = np.loadtxt('data/oc111919_23.txt')  # trial 6
-Data[9, :, :] = np.loadtxt('data/oc112519_18.txt')  # trial 11
-Data[10, :, :] = np.loadtxt('data/oc112519_43.txt')  # trial 14
-Data[11, :, :] = np.loadtxt('data/oc092019_18.txt')  # trial 4
+# homogeneous oscillators
+Data[0, :, :] = np.loadtxt('data/oc092019_3.txt')
+Data[1, :, :] = np.loadtxt('data/oc092019_11.txt')
+Data[2, :, :] = np.loadtxt('data/oc111919_19.txt')
+Data[3, :, :] = np.loadtxt('data/oc112519_17.txt')
+Data[4, :, :] = np.loadtxt('data/oc112519_40.txt')
+Data[5, :, :] = np.loadtxt('data/oc092019_20.txt')
+# heterogeneous oscillators
+Data[6, :, :] = np.loadtxt('data/oc092019_7.txt')
+Data[7, :, :] = np.loadtxt('data/oc092019_9.txt')
+Data[8, :, :] = np.loadtxt('data/oc111919_23.txt')
+Data[9, :, :] = np.loadtxt('data/oc112519_18.txt')
+Data[10, :, :] = np.loadtxt('data/oc112519_43.txt')
+Data[11, :, :] = np.loadtxt('data/oc092019_18.txt')
 
 # <md>
-# Visually confirm that Peak Detection works as intended
+# Visually confirm that Peak Detection works as intended.
+# Peak Detection is used to extract the frequency and amplitude of uncoupled oscillators, which in turn are used to calculate the measured oscillator heterogeneity.
 
 # In[]
+# randomly pick an oscillator from one of the time series
 i = np.random.randint(m)
 j = np.random.randint(n)
 t = np.linspace(0, 102, num=20400)
 
+# identify all the peaks
 peaks, _ = find_peaks(Data[i, :, j], height=.25, distance=200)
 
-
+# plot the current for that oscillator with all the peaks marked by x
 fig = plt.figure(0)
 
 ax = plt.subplot(111)
@@ -92,20 +96,18 @@ plt.plot(t[peaks], Data[i, peaks, j], "x", ms=15)
 
 plt.xlim([0, 100])
 plt.ylim([0, .6])
-plt.gca().tick_params(axis='y', pad=15, size=10, width=2)
-plt.gca().tick_params(axis='x', pad=25, size=10, width=2)
-#plt.xticks([550, 575, 600])
+plt.gca().tick_params(axis='y', pad=5, size=10, width=2)
+plt.gca().tick_params(axis='x', pad=5, size=10, width=2)
 plt.yticks([0, .3, .6])
 
 fig.set_tight_layout(True)
 plt.savefig('peak_detection.pdf')
 
 # <md>
-# Calculate the s.t.d. of oscillation periods and amplitudes for the uncoupled oscillators
+# Calculate the standard deviation of oscillation periods and amplitudes for the uncoupled oscillators.
+# These standard deviations are then combined to calculate the measured oscillator heterogeneity.
 
 # In[]
-
-
 def std_period_amplitude(x):
     # x is the raw time serise data (2D Array)
     period = np.zeros(n)
@@ -115,27 +117,29 @@ def std_period_amplitude(x):
         period[j] = (peaks[-1] - peaks[1]) / 200.0 / (np.size(peaks) - 1)
         amplitude[j] = np.mean(x[peaks, j])
 
-    # return the sum of % difference in periods and amplitudes
+    # return the sum of % difference in periods and amplitudes (i.e., measured oscillator heterogeneity)
     return np.std(period) / np.mean(period) + np.std(amplitude) / np.mean(amplitude)
 
 
 # In[]
+# Delta is the measured oscillator heterogeneity
 Delta = np.zeros(m)
 for i in range(m):
     Delta[i] = std_period_amplitude(Data[i, :, :])
 
 
 # <md>
-# Calculate the sync error of coupled heterogeneous oscillators
+# Calculate the time-averaged synchronization error of coupled oscillators for different realizations of heterogeneity (one realization per experiment).
 
 # In[]
+# time-averaged synchronization error (averaged over the last 200 seconds of data for each experiment)
 error = np.zeros(m)
 for i in range(m):
     error[i] = np.mean(np.std(data[i, 80000:, :], axis=1))
 
 
 # <md>
-# Plot heterogeneity vs sync diagram
+# Plot time-averaged synchronization error $⟨e⟩$ vs. measured oscillator heterogeneity $\Delta$, where each dot represents a different realization of heterogeneous (orange) and homogeneous (blue) systems.
 
 # In[]
 fig = plt.figure(1)
@@ -150,15 +154,17 @@ plt.yticks(fontsize=30)
 plt.xlabel(r'$\Delta$', fontsize=40)
 plt.ylabel(r'$\langle e \rangle$', fontsize=40)
 
+# plot homogeneous systems
 plt.plot(Delta[1:6], error[1:6], marker='o', ms=25, ls='none')
 plt.text(.025, .05, 'homogeneous', fontsize=30, c=tableau20[0])
+# plot heterogeneous systems
 plt.plot(Delta[7:], error[7:], marker='o', ms=25, ls='none')
 plt.text(.05, .02, 'heterogeneous', fontsize=30, c=tableau20[2])
 
 #plt.xlim([.025, .075])
 #plt.ylim([.01, .08])
-plt.gca().tick_params(axis='y', pad=15, size=10, width=2)
-plt.gca().tick_params(axis='x', pad=25, size=10, width=2)
+plt.gca().tick_params(axis='y', pad=5, size=10, width=2)
+plt.gca().tick_params(axis='x', pad=5, size=10, width=2)
 #plt.xticks([.03, .05, .07])
 #plt.yticks([.02, .05, .08])
 

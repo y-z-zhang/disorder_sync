@@ -1,3 +1,6 @@
+# <md>
+# This script analyzes how the level of synchrony changes with oscillator heterogeneity in our electrochemical experiments.
+
 # In[]
 from scipy.signal import hilbert, find_peaks
 import matplotlib.pyplot as plt
@@ -20,11 +23,14 @@ for i in range(len(tableau20)):
     r, g, b = tableau20[i]
     tableau20[i] = (r / 255., g / 255., b / 255.)
 
+# <md>
+# Import time series for coupled oscillators measured from the electrochemical experiments (600 seconds of data for each time series).
+
 # In[]
 n = 16  # number of oscillators
 m = 8   # number of experiments
 
-# measured time series for coupled oscillators (600 seconds of data for each time series)
+# time series for coupled oscillators
 data = np.zeros((m, 120480, n))
 data[0, :, :] = np.loadtxt('data/oc091319_8.txt')
 data[1, :, :] = np.loadtxt('data/oc110819_14.txt')

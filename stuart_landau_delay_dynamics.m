@@ -1,7 +1,7 @@
 function stuart_landau_delay_dynamics(n,para,sigma)
 % This code simulates delay-coupled Stuart-Landau oscillators using MATLAB dde23
 % n -- number of oscillators
-% para -- which oscillator to make heterogeneous ('none', lambda', 'w', 'gamma', 'all')
+% para -- which oscillator to make heterogeneous ('none', 'lambda', 'w', 'gamma', 'all')
 % sigma -- level of heterogeneity measured by standard deviation
 % For Fig.1 in the paper, n=18, para='w', sigma = 0.1.
 

@@ -25,7 +25,7 @@ All scripts below can be run independently of each other.
 
 5. `stability_code.m`
 
-  _MATLAB code calculating the maximal transverse Lyapunov exponent of the synchronization state by solving (transcedental) characteristic equations._
+  _MATLAB code calculating the maximal transverse Lyapunov exponent of the synchronization state by solving (transcendental) characteristic equations. This code requires the Optimization Toolbox._
 
 6. data
 

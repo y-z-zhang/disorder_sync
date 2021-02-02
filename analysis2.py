@@ -1,6 +1,6 @@
-# <md>
-# This script compares homogeneous and heterogeneous oscillators in terms of the measured oscillator heterogeneity (when uncoupled) and the time-averaged synchronization error (when coupled).
-# Five independent sets of electrochemical experiments are performed, which demonstrate that more heterogeneous oscillators can synchrnize better.
+# %% markdown
+# ## This script compares homogeneous and heterogeneous oscillators in terms of the measured oscillator heterogeneity (when uncoupled) and the time-averaged synchronization error (when coupled).
+# ## Five independent sets of electrochemical experiments are performed, which demonstrate that more heterogeneous oscillators can synchronize better (even when heterogeneity is random).
 
 # In[]
 from scipy.signal import hilbert, find_peaks
@@ -24,7 +24,7 @@ for i in range(len(tableau20)):
     r, g, b = tableau20[i]
     tableau20[i] = (r / 255., g / 255., b / 255.)
 
-# <md>
+# %% markdown
 # Import time series for coupled oscillators measured from the electrochemical experiments.
 
 # In[]
@@ -65,7 +65,7 @@ Data[9, :, :] = np.loadtxt('data/oc112519_18.txt')
 Data[10, :, :] = np.loadtxt('data/oc112519_43.txt')
 Data[11, :, :] = np.loadtxt('data/oc092019_18.txt')
 
-# <md>
+# %% markdown
 # Visually confirm that Peak Detection works as intended.
 # Peak Detection is used to extract the frequency and amplitude of uncoupled oscillators, which in turn are used to calculate the measured oscillator heterogeneity.
 
@@ -103,7 +103,7 @@ plt.yticks([0, .3, .6])
 fig.set_tight_layout(True)
 plt.savefig('peak_detection.pdf')
 
-# <md>
+# %% markdown
 # Calculate the standard deviation of oscillation periods and amplitudes for the uncoupled oscillators.
 # These standard deviations are then combined to calculate the measured oscillator heterogeneity.
 
@@ -128,7 +128,7 @@ for i in range(m):
     Delta[i] = std_period_amplitude(Data[i, :, :])
 
 
-# <md>
+# %% markdown
 # Calculate the time-averaged synchronization error of coupled oscillators for different realizations of heterogeneity (one realization per experiment).
 
 # In[]
@@ -138,7 +138,7 @@ for i in range(m):
     error[i] = np.mean(np.std(data[i, 80000:, :], axis=1))
 
 
-# <md>
+# %% markdown
 # Plot time-averaged synchronization error $⟨e⟩$ vs. measured oscillator heterogeneity $\Delta$, where each dot represents a different realization of heterogeneous (orange) and homogeneous (blue) systems.
 
 # In[]

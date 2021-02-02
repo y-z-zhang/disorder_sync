@@ -1,29 +1,26 @@
+# %% markdown
+# This script plots the time series of oscillators measured from the experiments.
+
 # In[]
-import os
-import seaborn as sns
-from scipy.signal import hilbert
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib
-matplotlib.use('PDF')
+#matplotlib.use('PDF')
 sfont = {'fontname': 'serif'}
 
-#os.chdir('/home/yuanzhao/random_hetero/Istvan')
-#print(os.getcwd())
+# %% markdown
+# Import time series for coupled oscillators measured from the electrochemical experiments (600 seconds of data for each time series)
 
 # In[]
-n = 16
+n = 16 # number of oscillators
 t = np.linspace(0, 600, num=120001)
 
-# experimental trajectories presented in the main text
-#current_homo = np.loadtxt('data/oc091319_8.txt')
-#current_hetero = np.loadtxt('data/oc091319_24.txt')
+# time series for homogeneous and heterogeneous oscillators, respectively
+current_homo = np.loadtxt('data/oc091319_8.txt')
+current_hetero = np.loadtxt('data/oc091319_24.txt')
 
-# experimental trajectories presented in the SI
-#current_homo = np.loadtxt('data/oc012521_13.txt')
-#current_hetero = np.loadtxt('data/oc012521_18.txt')
-current_homo = np.loadtxt('data/oc012221_5.txt')
-current_hetero = np.loadtxt('data/oc012221_8.txt')
+# %% markdown
+# Plot the evolution of currents
 
 # In[]
 fig = plt.figure(1)
@@ -78,6 +75,8 @@ plt.yticks([0, .3, .6])
 fig.set_tight_layout(True)
 plt.savefig('trj_hetero.pdf')
 
+# %% markdown
+# Calculate and plot the sync errors
 
 # In[]
 error_homo = np.std(current_homo, axis=1)
@@ -112,6 +111,8 @@ plt.yticks([0, .1, .2])
 fig.set_tight_layout(True)
 plt.savefig('error_t.pdf')
 
+# %% markdown
+# Plot the mean currents for the homogeneous and the heterogeneous systems
 
 # In[]
 fig = plt.figure(4)

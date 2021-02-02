@@ -1,6 +1,6 @@
 # %% markdown
 # ## This script compares homogeneous and heterogeneous oscillators in terms of the measured oscillator heterogeneity (when uncoupled) and the time-averaged synchronization error (when coupled).
-# ## Five independent sets of electrochemical experiments are performed, which demonstrate that more heterogeneous oscillators can synchronize better (even when heterogeneity is random).
+# ## Five independent sets of electrochemical experiments were performed, which demonstrate that more heterogeneous oscillators can synchronize better (even when heterogeneity is random).
 
 # In[]
 from scipy.signal import hilbert, find_peaks

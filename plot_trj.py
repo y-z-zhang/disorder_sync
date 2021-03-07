@@ -15,9 +15,12 @@ sfont = {'fontname': 'serif'}
 n = 16 # number of oscillators
 t = np.linspace(0, 600, num=120001)
 
-# time series for homogeneous and heterogeneous oscillators, respectively
+# time series for homogeneous and heterogeneous oscillators, respectively (Fig.7)
 current_homo = np.loadtxt('data/oc091319_8.txt')
 current_hetero = np.loadtxt('data/oc091319_24.txt')
+# time series for homogeneous and heterogeneous oscillators, respectively (Fig.S7)
+#current_homo = np.loadtxt('data/oc021121_24.txt')
+#current_hetero = np.loadtxt('data/oc021121_26.txt')
 
 # %% markdown
 # Plot the evolution of currents

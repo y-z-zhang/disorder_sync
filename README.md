@@ -1,6 +1,6 @@
 # Exploring the effect of random oscillator heterogeneity on network synchronization
 
-This repository is part of the paper: Y. Zhang, J. L. Ocampo-Espindola, I. Z. Kiss and A. E. Motter, _Random heterogeneity outperforms design in network synchronization_.
+This repository is part of the paper: Y. Zhang, J. L. Ocampo-Espindola, I. Z. Kiss and A. E. Motter, *Random heterogeneity outperforms design in network synchronization*, [Proc. Natl. Acad. Sci. U.S.A. 118 e2024299118 (2021)](https://doi.org/10.1073/pnas.2024299118).
 
 We hope the scripts and data included here will facilitate others in reproducing our results.
 The repository includes data analysis protocol for time series measured from the experiments, code for simulating delay-coupled Stuart-Landau oscillators in the presence of oscillator heterogeneity, and code for analyzing the stability of synchronization states.
